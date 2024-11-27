@@ -5,14 +5,14 @@ public class Package {
     private double dimensions;
     private boolean international;
     private String location;
-    private String carrier;
+    private String localCarrier;
 
-    public Package(double weight, double dimensions, boolean international, String location, String carrier) {
+    public Package(double weight, double dimensions, boolean international, String location, String localCarrier) {
         this.weight = weight;
         this.dimensions = dimensions;
         this.international = international;
         this.location = location;
-        this.carrier = carrier;
+        this.localCarrier = localCarrier;
     }
 
     public double getWeight() {
@@ -31,7 +31,7 @@ public class Package {
         return location;
     }
 
-    public String getCarrier() {
-        return carrier;
+    public String getLocalCarrier() {
+        return localCarrier;
     }
 }
