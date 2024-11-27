@@ -6,9 +6,9 @@ import com.github.luizredig.desing_patterns_semestral.strategy.interfaces.Transp
 public class LandTransport implements TransportStrategy {
     @Override
     public String calculateDelivery(Package pkg) {
-        if (pkg.getCarrier() == null || pkg.getCarrier().isEmpty()) {
+        if (pkg.getLocalCarrier() == null || pkg.getLocalCarrier().isEmpty()) {
             return "Transporte terrestre exige uma transportadora local. Nenhuma foi selecionada.";
         }
-        return "Usando transporte terrestre com a transportadora local: " + pkg.getCarrier();
+        return "Usando transporte terrestre com a transportadora local: " + pkg.getLocalCarrier();
     }
 }
