@@ -1,23 +1,32 @@
 package com.github.luizredig.desing_patterns_semestral.strategy;
 
-import com.github.luizredig.desing_patterns_semestral.strategy.transports.*;
+import com.github.luizredig.desing_patterns_semestral.strategy.interfaces.TransportStrategy;
 
 public class Main {
     public static void main(String[] args) {
-        Package pkg = new Package(3, 50, false, "metropolitan", "LocalCarrierX");
+        /* Criando pacotes */
+        Package pkg1 = new Package(5, 8, false, "metropolitan", "CarrierX");
+        Package pkg2 = new Package(30, 80, false, "urban", "CarrierY");
+        Package pkg3 = new Package(200, 250, true, "coastal", null);
+        Package pkg4 = new Package(50, 50, false, "urban", "CarrierZ");
 
-        TransportManager manager = new TransportManager(new LandTransport());
-        System.out.println(manager.deliverPackage(pkg));
+        /* Selecionando dinamicamente o tipo de transporte com base nas
+            características da encomenda e na localização do cliente. */
+        try {
+            TransportStrategy transport1 = TransportFactory.chooseTransport(pkg1);
+            System.out.println(transport1.calculateDelivery(pkg1));
 
-        manager.setStrategy(new AirTransport());
-        System.out.println(manager.deliverPackage(pkg));
+            TransportStrategy transport2 = TransportFactory.chooseTransport(pkg2);
+            System.out.println(transport2.calculateDelivery(pkg2));
 
-        pkg = new Package(10, 70, true, "coastal", "SeaCarrierY");
-        manager.setStrategy(new SeaTransport());
-        System.out.println(manager.deliverPackage(pkg));
+            TransportStrategy transport3 = TransportFactory.chooseTransport(pkg3);
+            System.out.println(transport3.calculateDelivery(pkg3));
 
-        pkg = new Package(4, 20, false, "metropolitan", "DroneCarrierZ");
-        manager.setStrategy(new DroneTransport());
-        System.out.println(manager.deliverPackage(pkg));
+            TransportStrategy transport4 = TransportFactory.chooseTransport(pkg4);
+            System.out.println(transport4.calculateDelivery(pkg4));
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
